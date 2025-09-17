@@ -1,0 +1,18 @@
+.sidePanel__newChat {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.8rem;
+  padding: 0.65rem;
+  gap: 0.5rem;
+  margin: 0.4rem 0.5rem;
+  color: white;
+  background: var(--accentColor);
+}
+
+.sidePanel__newChat:hover {
+  background: var(--accentColor);
+  opacity: 0.8;
+}

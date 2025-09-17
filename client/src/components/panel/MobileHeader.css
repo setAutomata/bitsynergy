@@ -1,0 +1,36 @@
+.mobileHeader {
+  position: fixed;
+  display: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 9;
+}
+
+.mobileHeader img {
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+}
+
+.mobileHeader_btn__container {
+  display: block;
+  cursor: pointer;
+  color: var(--svg-color);
+  padding: 0.7rem;
+}
+
+.mobileHeader_btn__container svg {
+  padding: 0.2rem;
+  border-radius: 0.3rem;
+}
+
+.mobileHeader_btn__container svg:hover {
+  background: var(--hover-bkg-color);
+}
+
+@media (max-width: 760px) {
+  .mobileHeader {
+    display: flex;
+  }
+}

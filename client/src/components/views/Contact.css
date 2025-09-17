@@ -1,0 +1,75 @@
+.contact__container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  bottom: 0;
+  background: var(--contact-bkg);
+  margin: 1rem;
+  clip-path: inset(0% 0% 0% 0% round 1rem);
+  display: none;
+  width: 23rem;
+  height: 85%;
+}
+
+.contact__content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow-y: scroll;
+  flex: 1;
+  scrollbar-width: thin;
+}
+
+.contact__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+  padding: 1rem;
+}
+
+.messages__header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.contact__logo {
+  width: 9rem;
+  padding: 1rem;
+}
+
+.contact__closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.contact__closeBtn:hover {
+  background: rgb(1, 1, 1, 0.2);
+  border-radius: 0.5rem;
+}
+
+.contact__closeBtn:hover {
+  background: var();
+}
+
+.contact__tabs {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 5rem;
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  height: 3rem;
+  box-shadow: -2px -2px 3px silver;
+}
+
+.contact__tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-direction: column;
+}

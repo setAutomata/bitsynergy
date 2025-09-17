@@ -1,0 +1,50 @@
+.profile{
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem 0;
+}
+
+.profile__row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prof-text-container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prof-small-content{
+  width: 80%;
+  font-size: 0.75rem;
+  color: var(--gray-text-color);
+}
+
+.prof-logout{
+  cursor: pointer;
+  color: var(--light-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--btn-border);
+  background: none;
+}
+
+.prof-logout:hover{
+  background: var(--btn-hover);
+}
+
+.prof-del-btn{
+  cursor: pointer;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  background: var(--modal-btn-del-bkg);
+}
+
+.prof-del-btn:hover{
+  background: var(--modal-btn-del-hover);
+}

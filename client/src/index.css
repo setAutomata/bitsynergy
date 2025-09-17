@@ -1,0 +1,114 @@
+@font-face {
+  font-family: Inter;
+  src: url("./assets/fonts/Inter-Regular.ttf");
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --accentColor: #298a00;
+  --background-color: #2a2d29;
+  --auth-bkg-color: black;
+  --sidePanel-bkg-color:#3c3d3a;
+  --sidePanel-border-color: #6a6a6a;
+  --floating-menu-bkg: #3a4539;
+  --floating-menu-hover: #4e5d4f;
+  --floating-menu-border: #444;
+  --gray-text-color: #999;
+  --light-text-color: #fff;
+  --inputBox-bkg: #414540;
+  --inputBox-border: #555;
+  --auth-box-bkg: #1a1a1a;
+  --auth-box-border: #2e2e2e;
+  --modal-bkg: #3e463a;
+  --modal-btn-bkg: #566255;
+  --modal-btn-hover: #5762557f;
+  --modal-btn-del-bkg: #ef4444;
+  --modal-btn-del-hover: #d53939;
+  --placeholder-color: #888;
+  --hover-bkg-color: #ffffff14;
+  --contact-bkg: #f7f8fc;
+  --settings-tabs-bkg: #616c5d;
+  --settings-tabs-active: #717e70;
+  --select-option-bkg: #576255;
+  --btn-border: #777;
+  --btn-hover: rgba(167, 167, 167, 0.3);
+  --error-text: #ff2e2e;
+  --error-border: #ff2e2e;
+  --svg-color: #888;
+  --inset-line-color: #555;
+  --qrCode-txt-color: #999;
+  --LLM-search-btn-bkg: #576454cb;
+  --LLM-search-btn-color: #87fb63;
+  --LLM-search-btn-border: #5a8443;
+  --LLM-search-btn-hover: #373f34;
+  --attachment-btn-color: #fff;
+  --scrollbar-thumb-color: #999;
+  --scrollbar-track-color: #292d29;
+  --markdown-content-color: #888;
+  --think-color: rgb(136, 153, 137);
+  --td-bkg: #35373b;
+  --content-width: 70%;
+  --code-header: #444b42;
+  --codeblock-header-border-color:#758071;
+  --code-bkg: #222721;
+  --rt-color-dark: black !important;
+  --rt-opacity: 1 !important;
+}
+
+.light {
+  --accentColor: #216d00;
+  --background-color: #d5dad2;
+  --auth-bkg-color: #e2e2e2;
+  --sidePanel-bkg-color: #b6c2b6;
+  --sidePanel-border-color: #444;
+  --floating-menu-bkg: #bfc4be;
+  --floating-menu-hover: #dbdbe3;
+  --floating-menu-border: #999;
+  --gray-text-color: #333;
+  --light-text-color: #111;
+  --hover-bkg-color: #00000044;
+  --inputBox-bkg: #e1e1e1;
+  --inputBox-border: #999;
+  --auth-box-bkg: #d0d0d0;
+  --auth-box-border: #999;
+  --btn-hover: rgba(0, 0, 0, 0.3);
+  --modal-bkg: #d5d5d5;
+  --modal-btn-bkg: #999;
+  --modal-btn-hover: #0000007f;
+  --svg-color: #222;
+  --inset-line-color: #999;
+  --settings-tabs-bkg: #aaaaaa;
+  --settings-tabs-active: #bebebe;
+  --select-option-bkg: #b1b1b1;
+  --qrCode-txt-color: #999;
+  --attachment-btn-color: #111;
+  --scrollbar-thumb-color: #222;
+  --scrollbar-track-color: #cecece;
+  --markdown-content-color: #555;
+  --think-color: rgb(83, 122, 89);
+  --td-bkg: #bebebe;
+  --code-header: #abb3aa;
+  --code-bkg: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+body {
+  font-family: Inter;
+}
+
+dialog {
+  border: none;
+}
+
+.sml-fnt {
+  font-size: 0.7rem;
+}
+
+.curs-ptr {
+  cursor: pointer;
+}

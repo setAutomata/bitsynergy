@@ -1,0 +1,17 @@
+.about{
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 0.5rem 0;
+}
+
+.view-btn{
+  color: var(--light-text-color);
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--btn-border);
+  border-radius: 0.6rem;
+}
+
+.view-btn:hover{
+  background: var(--btn-hover);
+}

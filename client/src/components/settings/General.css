@@ -1,0 +1,30 @@
+.general {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 0.5rem 0;
+}
+
+.__top,
+.__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select-container {
+  background: var(--select-option-bkg);
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.general__option {
+  cursor: pointer;
+  background: var(--select-option-bkg);
+  border-radius: 0.4rem;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.5rem;
+  color: var(--light-text-color);
+  width: fit-content;
+}

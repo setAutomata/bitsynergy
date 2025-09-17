@@ -1,0 +1,39 @@
+.profileOptions {
+  position: absolute;
+  display: none;
+  background: var(--floating-menu-bkg);
+  border-radius: 0.5rem;
+  bottom: 2.5rem;
+  left: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--floating-menu-border);
+  width: auto;
+  z-index: 37;
+  animation: emerge 400ms ease;
+}
+
+@keyframes emerge {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  line-height: 2.5rem;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
+  padding: 0 1.5rem 0 0.7rem;
+  color: var(--light-text-color);
+  white-space: nowrap;
+}
+
+.option:hover {
+  transition: all 800ms ease;
+}

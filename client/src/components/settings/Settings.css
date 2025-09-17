@@ -1,0 +1,75 @@
+.setting__dialog {
+  inset: 0;
+  margin: auto;
+  clip-path: inset(0% 0% 0% 0% round 1rem);
+  color: var(--light-text-color);
+  width: 33rem;
+}
+
+.setting__dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.Settings__dialg__container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  gap: 1rem;
+  background: var(--modal-bkg);
+}
+
+.settings__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeBtn {
+  color:var(-svg-color);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.closeBtn:hover {
+  background: var(--btn-hover);
+}
+
+.settings__tabs {
+  display: flex;
+  align-items: center;
+  background: var(--settings-tabs-bkg);
+  border-radius: 0.7rem;
+  padding: 0.2rem;
+  width: 99%;
+}
+
+.setting__tab {
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+}
+
+.tab__active {
+  border-radius: 0.5rem;
+  background: var(--settings-tabs-active);
+}
+
+.settings__content {
+  font-size: 0.9rem;
+}
+
+.insetLine{
+  border-bottom: 1px solid var(--inset-line-color);
+  width: 100%;
+}
+
+/* ------------------- */
+
+@media (max-width: 760px) {
+  .setting__dialog {
+    width: 90%;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "bitSynergy",
+  "version": "1.0.0",
+  "description": "AI client to interact with LLM",
+  "scripts": {
+    "dev": "concurrently 'cd client && npm run dev' 'cd server && npm run dev'",
+    "preview": "concurrently 'cd client && npm run preview' 'cd server && npm run server'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/setAutomata/bitsynergy.git"
+  },
+  "keywords": [
+    "AI",
+    "LLM"
+  ],
+  "author": "setAutomata",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^9.2.0"
+  }
+}

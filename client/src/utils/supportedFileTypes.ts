@@ -1,0 +1,1 @@
+export default "application/pdf,image/*,text/*, .csv, .tsv,.json, .log, .yaml, .yml, .ini, .conf, .html, .md, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .java, .js, .jsx, .ts, .tsx, .css, .php, .py, .rb, .go, .cpp, .h, .c, .sql, .xml, .json5, .svg, .gif, .webp, .bmp, .ico, .txt, .md, .html,  .yaml, .yml, .conf, .properties, .svg, .ico, .webp, .apng, .avif";
