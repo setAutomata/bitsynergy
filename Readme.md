@@ -67,6 +67,7 @@ bitSynergy/
 git clone https://github.com/setAutomata/bitsynergy.git
 cd bitsynergy
 ```
+- N.B Also install ollama and mongoDB on your system
 
 ### 2. Install Dependencies
 ```bash
@@ -79,9 +80,16 @@ cd client && npm install
 Create `.env` files in both `client/` and `server/` directories:
 - On *server/***.env**
 ```
-PORT=5000
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret_key
+PORT=3030
+HOSTNAME=localhost
+DATABASE_URI=mongodb://localhost:27017/bitSynergy
+SALT_WORK_FACTOR=10
+ACCESS_TOKEN=<your access token>
+REFRESH_TOKEN=<your refresh token>
+ACCESS_TOKEN_LIFESPAN=30m
+REFRESH_TOKEN_LIFESPAN=1d
+COOKIE_MAX_AGE=86400000
+NODE_ENV=development
 ```
 you can generate *secret key* using Node.Js:
 ```bash
