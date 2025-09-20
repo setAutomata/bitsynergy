@@ -50,8 +50,8 @@ async function handleAuth(req, res) {
 
         res.cookie("jwt", refreshToken, {
           httpOnly: true,
-          secure: true,
-          sameSite: "None",
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "None" : "lax",
           maxAge: process.env.COOKIE_MAX_AGE,
         });
 

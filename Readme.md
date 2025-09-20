@@ -104,5 +104,23 @@ sudo chmod +x runProject.sh
 ./runProject.sh
 ```
 
+### Ollama setup for mobile phone
+- On Linux
+```bash
+sudo systemctl edit ollama.service
+
+```
+add the line:
+```
+[Service]
+Environment="OLLAMA_HOST=0.0.0.0"
+Environment="OLLAMA_ORIGINS=http://<your local ip>:*"
+```
+- On Mac
+```
+launchctl setenv OLLAMA_HOST "0.0.0.0"
+launchctl setenv OLLAMA_ORIGINS "http://<your local ip>:*"
+```
+
 ## 🤝 Contributing
 This project is part of my portfolio. Feel free to provide suggestions and improvements.

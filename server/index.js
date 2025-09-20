@@ -26,7 +26,11 @@ app.use(express.urlencoded({ extended: true, limit: "15mb" }));
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigin = ["http://localhost:5173","http://localhost:4173"];
+const allowedOrigin = (origin, cb) => {
+  if (origin && origin.startsWith("http://")) cb(null, true);
+  else cb(new Error("Not allowed by CORS!"));
+};
+
 app.use(
   cors({
     origin: allowedOrigin,
