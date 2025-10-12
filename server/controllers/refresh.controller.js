@@ -9,24 +9,29 @@ async function handleRefreshToken(req, res) {
     if (!user || user.refreshToken !== refreshToken)
       return res.status(403).json({ message: "Invalid token" });
 
-    JWT.verify(refreshToken, process.env.REFRESH_TOKEN, (err, decoded) => {
-      if (err) {
-        if (err.name === "TokenExpiredError")
-          return res.status(403).json({ message: "Refresh token expired" });
-        else return res.status(403).json({ message: "Invalid refresh token" });
+    JWT.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET,
+      (err, decoded) => {
+        if (err) {
+          if (err.name === "TokenExpiredError")
+            return res.status(403).json({ message: "Refresh token expired" });
+          else
+            return res.status(403).json({ message: "Invalid refresh token" });
+        }
       }
-    });
+    );
 
     const accessToken = JWT.sign(
       { userID: user._id, email: user.email },
-      process.env.ACCESS_TOKEN,
-      { expiresIn: process.env.ACCESS_TOKEN_LIFESPAN }
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: process.env.ACCESS_TOKEN_SECRET_LIFESPAN }
     );
 
     const newRefreshToken = JWT.sign(
       { userID: user._id },
-      process.env.REFRESH_TOKEN,
-      { expiresIn: process.env.REFRESH_TOKEN_LIFESPAN }
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: process.env.REFRESH_TOKEN_SECRET_LIFESPAN }
     );
 
     try {

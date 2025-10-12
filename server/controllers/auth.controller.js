@@ -27,14 +27,14 @@ async function handleAuth(req, res) {
       if (isMatch) {
         const accessToken = JWT.sign(
           { userID: user._id, email: user.email },
-          process.env.ACCESS_TOKEN,
-          { expiresIn: process.env.ACCESS_TOKEN_LIFESPAN }
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: process.env.ACCESS_TOKEN_SECRET_LIFESPAN }
         );
 
         const refreshToken = JWT.sign(
           { userID: user._id },
-          process.env.REFRESH_TOKEN,
-          { expiresIn: process.env.REFRESH_TOKEN_LIFESPAN }
+          process.env.REFRESH_TOKEN_SECRET,
+          { expiresIn: process.env.REFRESH_TOKEN_SECRET_LIFESPAN }
         );
 
         try {

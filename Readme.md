@@ -1,15 +1,14 @@
 ![Static Badge](https://img.shields.io/badge/DB-MongoDB-green)
-![Static Badge](https://img.shields.io/badge/Typescript-blue)
-![Static Badge](https://img.shields.io/badge/Frontend-ReactJS-blue)
-![Static Badge](https://img.shields.io/badge/Backend-NodeJS-darkgreen)
 ![Static Badge](https://img.shields.io/badge/license-MIT-orange)
 
 # bitSynergy
+
 AI client to interact with LLMs using Ollama API.
 
 ![bitSynergy preview](./preview.webp)
 
-## ✨ Features
+## Features
+
 - JWT Authentication
 - Support for multimodal LLMs
 - Mobile view
@@ -23,16 +22,21 @@ AI client to interact with LLMs using Ollama API.
 - Logging
 
 ## 🛠️ Tech Stack
+
 ### Frontend (Client)
+
 - React 19 + Vite
 - typescript
 - Axios (for API calls)
+
 ### Backend (Server)
+
 - Node.js
 - Express.js
 - MongoDB / Mongoose
 
 ## 📁 Project Structure
+
 ```
 bitSynergy/
 ├── client/
@@ -60,16 +64,19 @@ bitSynergy/
 └── README.md
 ```
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### 1. Clone the Repo
+
 ```bash
 git clone https://github.com/setAutomata/bitsynergy.git
 cd bitsynergy
 ```
+
 - N.B Also install ollama and mongoDB on your system
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 cd server && npm install
@@ -77,58 +84,75 @@ cd client && npm install
 ```
 
 ### 3. Setup Environment Variables
+
 Create `.env` files in both `client/` and `server/` directories:
-- On *server/***.env**
+
+- On \*server/**\*.env**
+
 ```
 PORT=3030
 HOSTNAME=localhost
 DATABASE_URI=mongodb://localhost:27017/bitSynergy
 SALT_WORK_FACTOR=10
-ACCESS_TOKEN=<your access token>
-REFRESH_TOKEN=<your refresh token>
-ACCESS_TOKEN_LIFESPAN=30m
-REFRESH_TOKEN_LIFESPAN=1d
+ACCESS_TOKEN_SECRET=<your access token>
+REFRESH_TOKEN_SECRET=<your refresh token>
+ACCESS_TOKEN_SECRET_LIFESPAN=30m
+REFRESH_TOKEN_SECRET_LIFESPAN=1d
 COOKIE_MAX_AGE=86400000
 NODE_ENV=development
 ```
-you can generate *secret key* using Node.Js:
+
+you can generate _refresh and access token_ using Node.Js:
+
 ```bash
 node
 require('crypto').randomBytes(64).toString('hex')
 ```
-- On *client/***.env**
+
+- On \*client/**\*.env**
+
 ```
-VITE_API_BASE_URL=http://localhost:5000/api
+VITE_BACKEND_BASEURL=http://localhost:3030
 ```
 
 ### 4. Run the App
+
 ```bash
 cd server/ && npm run dev
 cd client/ && npm run dev
 ```
-- (optional) For Linux users on gnome desktop environment, you can run the *runProject.sh* shell script:
+
+- (optional) For Linux users on gnome desktop environment, you can run the _runProject.sh_ shell script:
+
 ```bash
 sudo chmod +x runProject.sh
 ./runProject.sh
 ```
 
 ### Ollama setup for mobile phone
+
 - On Linux
+
 ```bash
 sudo systemctl edit ollama.service
 
 ```
+
 add the line:
+
 ```
 [Service]
 Environment="OLLAMA_HOST=0.0.0.0"
 Environment="OLLAMA_ORIGINS=http://<your local ip>:*"
 ```
+
 - On Mac
+
 ```
 launchctl setenv OLLAMA_HOST "0.0.0.0"
 launchctl setenv OLLAMA_ORIGINS "http://<your local ip>:*"
 ```
 
 ## 🤝 Contributing
+
 This project is part of my portfolio. Feel free to provide suggestions and improvements.
