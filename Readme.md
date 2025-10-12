@@ -1,5 +1,9 @@
-![Static Badge](https://img.shields.io/badge/DB-MongoDB-green)
-![Static Badge](https://img.shields.io/badge/license-MIT-orange)
+[![GitHub Stars](https://img.shields.io/github/stars/setAutomata/bitsynergy.svg?style=flat&color=ff6d00)](https://github.com/setAutomata/bitsynergy/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/setAutomata/bitsynergy.svg?style=flat&color=400e6d)](https://github.com/setAutomata/bitsynergy/network)
+[![GitHub Issues](https://img.shields.io/github/issues/setAutomata/bitsynergy.svg?style=flat&color=706700)](https://github.com/setAutomata/bitsynergy/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/setAutomata/bitsynergy.svg?style=flat&color=3d9000)](https://github.com/setAutomata/bitsynergy/pulls)
+[![Repo Size](https://img.shields.io/github/repo-size/setAutomata/bitsynergy.svg?style=flat&color=1a80b9)](https://github.com/setAutomata/bitsynergy)
+[![License](https://img.shields.io/github/license/setAutomata/bitsynergy.svg?style=flat&color=008e5e)](https://github.com/setAutomata/bitsynergy/blob/main/LICENSE)
 
 # bitSynergy
 
@@ -21,7 +25,7 @@ AI client to interact with LLMs using Ollama API.
 - GUI heavily inspired by https://chat.deepseek.com/
 - Logging
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend (Client)
 
@@ -94,15 +98,15 @@ PORT=3030
 HOSTNAME=localhost
 DATABASE_URI=mongodb://localhost:27017/bitSynergy
 SALT_WORK_FACTOR=10
-ACCESS_TOKEN_SECRET=<your access token>
-REFRESH_TOKEN_SECRET=<your refresh token>
+ACCESS_TOKEN_SECRET=<your access token key>
+REFRESH_TOKEN_SECRET=<your refresh token key>
 ACCESS_TOKEN_SECRET_LIFESPAN=30m
 REFRESH_TOKEN_SECRET_LIFESPAN=1d
 COOKIE_MAX_AGE=86400000
 NODE_ENV=development
 ```
 
-you can generate _refresh and access token_ using Node.Js:
+you can generate _refresh and access token secret keys_ using Node.Js:
 
 ```bash
 node
@@ -153,6 +157,6 @@ launchctl setenv OLLAMA_HOST "0.0.0.0"
 launchctl setenv OLLAMA_ORIGINS "http://<your local ip>:*"
 ```
 
-## 🤝 Contributing
+## Contributing
 
 This project is part of my portfolio. Feel free to provide suggestions and improvements.
