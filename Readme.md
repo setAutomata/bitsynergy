@@ -1,9 +1,9 @@
-[![GitHub Stars](https://img.shields.io/github/stars/setAutomata/bitsynergy.svg?style=flat&color=ff6d00)](https://github.com/setAutomata/bitsynergy/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/setAutomata/bitsynergy.svg?style=flat&color=400e6d)](https://github.com/setAutomata/bitsynergy/network)
-[![GitHub Issues](https://img.shields.io/github/issues/setAutomata/bitsynergy.svg?style=flat&color=706700)](https://github.com/setAutomata/bitsynergy/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/setAutomata/bitsynergy.svg?style=flat&color=3d9000)](https://github.com/setAutomata/bitsynergy/pulls)
-[![Repo Size](https://img.shields.io/github/repo-size/setAutomata/bitsynergy.svg?style=flat&color=1a80b9)](https://github.com/setAutomata/bitsynergy)
-[![License](https://img.shields.io/github/license/setAutomata/bitsynergy.svg?style=flat&color=008e5e)](https://github.com/setAutomata/bitsynergy/blob/main/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/setAutomata/bitsynergy.svg?style=flat&color=005888)](https://github.com/setAutomata/bitsynergy/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/setAutomata/bitsynergy.svg?style=flat&color=005e88)](https://github.com/setAutomata/bitsynergy/network)
+[![GitHub Issues](https://img.shields.io/github/issues/setAutomata/bitsynergy.svg?style=flat&color=006d88)](https://github.com/setAutomata/bitsynergy/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/setAutomata/bitsynergy.svg?style=flat&color=008488)](https://github.com/setAutomata/bitsynergy/pulls)
+[![Repo Size](https://img.shields.io/github/repo-size/setAutomata/bitsynergy.svg?style=flat&color=008879)](https://github.com/setAutomata/bitsynergy)
+[![License](https://img.shields.io/github/license/setAutomata/bitsynergy.svg?style=flat&color=008863)](https://github.com/setAutomata/bitsynergy/blob/main/LICENSE)
 
 # bitSynergy
 
@@ -133,7 +133,7 @@ sudo chmod +x runProject.sh
 ./runProject.sh
 ```
 
-### Ollama setup for mobile phone
+### Setup Ollama API to prevent CORS issue when accessing from mobile phone
 
 - On Linux
 
