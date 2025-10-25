@@ -1,6 +1,6 @@
 node_modules/
-logs/*
-!logs
+logs/*.logs
+!logs/
 dist/
 *.env
 request.rest
