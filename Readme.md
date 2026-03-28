@@ -77,7 +77,7 @@ git clone https://github.com/setAutomata/bitsynergy.git
 cd bitsynergy
 ```
 
-- N.B Also install ollama and mongoDB on your system
+>N.B Also install ollama and mongoDB on your system
 
 ### 2. Install Dependencies
 
@@ -91,7 +91,7 @@ cd client && npm install
 
 Create `.env` files in both `client/` and `server/` directories:
 
-- On \*server/**\*.env**
+> On _server/.env_
 
 ```
 PORT=3030
@@ -108,12 +108,12 @@ NODE_ENV=development
 
 you can generate _refresh and access token secret keys_ using Node.Js:
 
-```bash
+```js
 node
 require('crypto').randomBytes(64).toString('hex')
 ```
 
-- On \*client/**\*.env**
+> On _client/.env_
 
 ```
 VITE_BACKEND_BASEURL=http://localhost:3030
@@ -126,7 +126,7 @@ cd server/ && npm run dev
 cd client/ && npm run dev
 ```
 
-- (optional) For Linux users on gnome desktop environment, you can run the _runProject.sh_ shell script:
+>(optional) For Linux users on gnome desktop environment, you can run the _runProject.sh_ shell script:
 
 ```bash
 sudo chmod +x runProject.sh
@@ -135,7 +135,7 @@ sudo chmod +x runProject.sh
 
 ### Setup Ollama API to prevent CORS issue when accessing from mobile phone
 
-- On Linux
+>On Linux
 
 ```bash
 sudo systemctl edit ollama.service
@@ -150,7 +150,7 @@ Environment="OLLAMA_HOST=0.0.0.0"
 Environment="OLLAMA_ORIGINS=http://<your local ip>:*"
 ```
 
-- On Mac
+>On Mac
 
 ```
 launchctl setenv OLLAMA_HOST "0.0.0.0"

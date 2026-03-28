@@ -37,7 +37,7 @@ function Home() {
   const [chats, setChats] = useState<Chats>([]);
   const [state, dispatch] = useReducer(homeReducer, initialState) as [
     HomeState,
-    React.Dispatch<HomeAction>
+    React.Dispatch<HomeAction>,
   ];
   const [LLMmodel, setLLMmodel] = useState<string>("");
   const inputFile = useRef<HTMLInputElement>(null);
@@ -70,21 +70,21 @@ function Home() {
     document.addEventListener(
       "click",
       closeModelsContainer as unknown as EventListener,
-      true
+      true,
     );
 
     return () =>
       document.removeEventListener(
         "click",
         closeModelsContainer as unknown as EventListener,
-        true
+        true,
       );
   }, [state.clicked.model]);
 
   if (isError) handleError("Error fetching LLM Lists");
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    const text = e.currentTarget.innerText.trim();
+    const text = e.currentTarget.innerText?.trim();
     if (text === "\n") return;
     dispatch({ type: "SET_PROMPT", payload: text });
   }
@@ -126,14 +126,18 @@ function Home() {
       payload: utils.sanitizePrompt(state.prompt),
     });
     dispatch({ type: "SET_SUBMITTED", payload: true });
-    let base64Image = null;
     const newMsg: Message = { role: "user", content: state.prompt };
 
+    // separate text file from image file
     if (inputFile.current?.files?.length) {
-      base64Image = await utils.fileToBase64(
-        inputFile.current.files[inputFile.current.files.length - 1]
-      );
-      if (base64Image) newMsg.images = [base64Image];
+      const file = inputFile.current.files[inputFile.current.files.length - 1];
+      if (file.type.startsWith("text/")) {
+        const textContent = await file.text();
+        newMsg.content = (newMsg.content || "") + "\n" + textContent;
+      } else {
+        const base64Img = await utils.fileToBase64(file);
+        if (base64Img) newMsg.images = [base64Img];
+      }
     }
     const id = chats[chats.length - 1]?._id ?? new ObjectID().toString();
     const updatedMsg: Chats = [
@@ -159,7 +163,7 @@ function Home() {
         abortControllerRef.current.signal,
         email,
         id,
-        LLMmodel
+        LLMmodel,
       );
       if (!response) return handleError("Error: No response received from API");
       await handleStream(response);

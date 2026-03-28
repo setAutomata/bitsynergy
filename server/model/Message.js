@@ -12,16 +12,15 @@ const messageSchema = new mongoose.Schema({
     required: false,
     validate: function (arr) {
       return arr.every(
-        (str) => typeof str === "string" && /^[A-Za-z0-9+/=]+$/.test(str)
+        (str) => typeof str === "string" && /^[A-Za-z0-9+/=]+$/.test(str),
       );
     },
     message: "Each image must be a valid Base64 image URL",
   },
 });
 
-messageSchema.pre("save", function (next) {
+messageSchema.pre("save", function () {
   if (this.role !== "user") this.images = undefined;
-  next();
 });
 
 export default messageSchema;

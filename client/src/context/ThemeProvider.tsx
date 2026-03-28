@@ -19,7 +19,7 @@ function ThemeProvider({ children }: ThemeProviderT) {
 
     return () =>
       mediaQuery.removeEventListener("change", handleColorSchemeChange);
-  }, []);
+  }, [mediaQuery]);
 
   return (
     <ThemeContext.Provider value={{ colorScheme, setColorScheme }}>

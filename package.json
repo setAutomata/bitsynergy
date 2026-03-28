@@ -1,6 +1,6 @@
 {
   "name": "bitSynergy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AI client to interact with LLM",
   "scripts": {
     "dev": "concurrently 'cd client && npm run dev' 'cd server && npm run dev'",

@@ -3,4 +3,5 @@ logs/*.logs
 !logs/
 dist/
 *.env
+coverage/
 request.rest

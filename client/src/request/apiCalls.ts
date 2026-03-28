@@ -16,7 +16,7 @@ const OLLAMA_TAGS_ENDPOINT = "/api/tags";
 
 export const authenticate = async (
   user: User,
-  setIsLoading: React.Dispatch<SetStateAction<boolean>>
+  setIsLoading: React.Dispatch<SetStateAction<boolean>>,
 ): Promise<{ data: { accessToken: string } } | undefined> => {
   try {
     setIsLoading(true);
@@ -29,7 +29,7 @@ export const authenticate = async (
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      }
+      },
     );
   } catch (error) {
     const err = error as AxiosError<{ message: string }>;
@@ -54,7 +54,7 @@ export const refreshToken = async (): Promise<string | undefined> => {
 
 export const signup = async (
   user: User,
-  setIsLoading: React.Dispatch<SetStateAction<boolean>>
+  setIsLoading: React.Dispatch<SetStateAction<boolean>>,
 ): Promise<string | undefined> => {
   try {
     setIsLoading(true);
@@ -67,7 +67,7 @@ export const signup = async (
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      }
+      },
     );
     return response.data.message;
   } catch (error) {
@@ -92,7 +92,7 @@ export const logout = async (): Promise<string | undefined> => {
 
 export const deleteChat = async (
   _id: string,
-  email: string
+  email: string,
 ): Promise<string | undefined> => {
   try {
     const response = await axios_.delete(`${CHAT_ENDPOINT}/${_id}`, {
@@ -122,7 +122,7 @@ export const deleteAccount = async (email: string): Promise<string | null> => {
 };
 
 export const fetchLLMList = async (
-  accessToken: string | null
+  accessToken: string | null,
 ): Promise<any | undefined | null> => {
   if (!accessToken) return Promise.resolve(null);
 
@@ -144,7 +144,7 @@ export const fetchLLMList = async (
 export const updateTitle = async (
   title: string,
   email: string,
-  _id: string
+  _id: string,
 ): Promise<string | null> => {
   try {
     const resp = await axios_.put(
@@ -153,7 +153,7 @@ export const updateTitle = async (
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      }
+      },
     );
     return resp.data.message;
   } catch (error) {
@@ -164,7 +164,7 @@ export const updateTitle = async (
 
 export const checkUser = async (
   user: User,
-  setIsLoading: React.Dispatch<SetStateAction<boolean>>
+  setIsLoading: React.Dispatch<SetStateAction<boolean>>,
 ): Promise<string | undefined> => {
   try {
     setIsLoading(true);
@@ -183,7 +183,7 @@ export const checkUser = async (
 
 export const updatePassword = async (
   user: User,
-  setIsLoading: React.Dispatch<SetStateAction<boolean>>
+  setIsLoading: React.Dispatch<SetStateAction<boolean>>,
 ): Promise<string | null> => {
   try {
     setIsLoading(true);
@@ -193,7 +193,7 @@ export const updatePassword = async (
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      }
+      },
     );
     return "Password Changed Successfully";
   } catch (error) {
@@ -213,7 +213,7 @@ export const getChat = async (email: string | null): Promise<Chats | null> => {
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      }
+      },
     );
     return response.data;
   } catch (error) {
@@ -228,7 +228,7 @@ export const chat = async (
   signal: AbortSignal,
   email: string | null,
   _id: string,
-  model: string
+  model: string,
 ): Promise<Response | null> => {
   try {
     return await fetch(
@@ -251,7 +251,7 @@ export const chat = async (
           keep_alive: "10m",
         }),
         signal: signal,
-      }
+      },
     );
   } catch (error) {
     handleError(error);

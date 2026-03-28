@@ -57,7 +57,7 @@ app.all(/(.*)/, (req, res) => {
 
 const opt = {
   port: process.env.PORT,
-  host: process.env.HOSTNAME,
+  host: process.env.APP_HOSTNAME,
 };
 
 mongoose.connection.once("open", () => {

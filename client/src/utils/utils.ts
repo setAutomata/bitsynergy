@@ -3,16 +3,15 @@ import langToExt from "./lang-to-ext-map.ts";
 
 export function handleInputState(
   e: React.ChangeEvent<HTMLInputElement>,
-  setState: React.Dispatch<React.SetStateAction<User>>
+  setState: React.Dispatch<React.SetStateAction<User>>,
 ) {
-  const name = e.target.name;
-  const value = e.target.value;
+  const { name, value } = e.target;
   setState((prev) => ({ ...prev, [name]: value }));
 }
 
 export function validateEmail(
   email: string,
-  setErrorMsg: React.Dispatch<React.SetStateAction<User>>
+  setErrorMsg: React.Dispatch<React.SetStateAction<User>>,
 ) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -21,8 +20,7 @@ export function validateEmail(
       ...prev,
       email: "Please enter the phone number / email address.",
     }));
-
-  if (!emailRegex.test(email))
+  else if (!emailRegex.test(email))
     setErrorMsg((prev) => ({
       ...prev,
       email: "Please provide a valid email address.",
@@ -31,7 +29,7 @@ export function validateEmail(
 
 export function validatePassword(
   password: string,
-  setErrorMsg: React.Dispatch<React.SetStateAction<User>>
+  setErrorMsg: React.Dispatch<React.SetStateAction<User>>,
 ) {
   if (!password)
     setErrorMsg((prev) => ({
@@ -47,7 +45,7 @@ export function validatePassword(
 
 export function validateConfirmPwd(
   confirmPwd: string,
-  setErrorMsg: React.Dispatch<React.SetStateAction<User>>
+  setErrorMsg: React.Dispatch<React.SetStateAction<User>>,
 ) {
   if (!confirmPwd)
     setErrorMsg((prev) => ({
@@ -63,7 +61,7 @@ export function validateConfirmPwd(
 
 export function validateCode(
   code: string,
-  setErrorMsg: React.Dispatch<React.SetStateAction<User>>
+  setErrorMsg: React.Dispatch<React.SetStateAction<User>>,
 ) {
   const codeRegex = /^[0-9]{3,6}$/;
   if (!code) {
@@ -72,7 +70,7 @@ export function validateCode(
       code: "Empty verification code.",
     }));
   }
-  if (!codeRegex.test(code) || !code)
+  if (!codeRegex.test(code))
     return setErrorMsg((prev) => ({
       ...prev,
       code: "Wrong verification code.",
@@ -93,14 +91,16 @@ export function sanitizePrompt(word: string) {
       // Remove special characters often used in code injection or abuse
       .replace(/[\\$`"<>|&;{}[\]*^~]/g, "")
       // Remove control characters (ASCII 0–31)
-      .replace(/[\x00-\x1F]/g, "")
+      .replace(/[\p{C}]/gu, "")
+      // Replace multiple spaces by one
+      .replace(/ +(?= )/g, "")
       .trim()
   );
 }
 
 export async function streamResponse(
   response: Response,
-  setChats: React.Dispatch<React.SetStateAction<Chats>>
+  setChats: React.Dispatch<React.SetStateAction<Chats>>,
 ): Promise<void | unknown> {
   const reader = response.body?.getReader();
   if (!reader) return;
@@ -109,7 +109,7 @@ export async function streamResponse(
     while (true) {
       const { done, value } = await reader.read();
       const content: string = JSON.parse(
-        decoder.decode(value, { stream: true })
+        decoder.decode(value, { stream: true }),
       ).message.content;
 
       setChats((prevChats) => {
@@ -133,7 +133,6 @@ export async function streamResponse(
         ];
         return updatedChats;
       });
-
       if (done) break;
     }
   } catch (error) {
@@ -145,13 +144,13 @@ export async function streamResponse(
 
 export function mapNameToExt(langName: string): string {
   const lang = langToExt.find(
-    (langExt) => langExt.name.toLowerCase() === langName.toLowerCase()
+    (langExt) => langExt.name.toLowerCase() === langName.toLowerCase(),
   );
   return lang ? lang.extensions[0] : "txt";
 }
 
-export function generateRandomNum() {
-  return Math.floor((1000 % Math.random()) * 999);
+export function generateRandomNum(): number {
+  return Math.floor(Math.random() * 1000);
 }
 
 export function formatDate(date: Date | undefined): string {
@@ -169,20 +168,20 @@ export function formatDate(date: Date | undefined): string {
 }
 
 export async function fileToBase64(file: File): Promise<Base64URLString> {
-  let base64Image: Base64URLString = await new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onloadend = () => {
-      // remove "data:image/png;base64,"
-      const result = reader.result;
-      if (typeof result === "string") {
-        const base64 = result.split(",")[1];
-        resolve(base64 as Base64URLString);
-      } else reject(new Error("Failed to read file as base64 string"));
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        // remove Metadata "data:image/png;base64,"
+        resolve(reader.result.split(",")[1] as Base64URLString);
+      } else
+        reject(
+          new Error(`Failed to read file as base64 string. ${reader.error}`),
+        );
     };
     reader.onerror = () => reject(new Error("File reading failed"));
     reader.readAsDataURL(file);
   });
-  return base64Image;
 }
 
 export function extractMessages(chatList: Chats): Message[] {

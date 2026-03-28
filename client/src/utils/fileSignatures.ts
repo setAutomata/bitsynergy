@@ -3,6 +3,7 @@ interface FileSignaturesI {
   MIME: string;
 }
 
+// signature values are in Base64 converted from Hex
 const fileSignatures: FileSignaturesI[] = [
   { signature: "JVBERi0", MIME: "application/pdf" },
   { signature: "iVBORw0KGgo", MIME: "image/png" },
