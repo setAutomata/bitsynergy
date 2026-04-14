@@ -28,7 +28,7 @@ function Signin() {
 
   const memoizedBanner = useMemo(
     () => <Banner message={serverMsg} setMsg={setServerMsg} />,
-    [serverMsg]
+    [serverMsg],
   );
 
   function validateInput() {

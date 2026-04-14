@@ -93,9 +93,9 @@ Create `.env` files in both `client/` and `server/` directories:
 
 > On _server/.env_
 
-```
+```bash
 PORT=3030
-HOSTNAME=localhost
+APP_HOSTNAME=127.0.0.1
 DATABASE_URI=mongodb://localhost:27017/bitSynergy
 SALT_WORK_FACTOR=10
 ACCESS_TOKEN_SECRET=<your access token key>
@@ -144,7 +144,7 @@ sudo systemctl edit ollama.service
 
 add the line:
 
-```
+```ini
 [Service]
 Environment="OLLAMA_HOST=0.0.0.0"
 Environment="OLLAMA_ORIGINS=http://<your local ip>:*"
@@ -152,7 +152,7 @@ Environment="OLLAMA_ORIGINS=http://<your local ip>:*"
 
 >On Mac
 
-```
+```bash
 launchctl setenv OLLAMA_HOST "0.0.0.0"
 launchctl setenv OLLAMA_ORIGINS "http://<your local ip>:*"
 ```

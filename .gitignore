@@ -1,7 +1,6 @@
 node_modules/
 logs/*.logs
-!logs/
 dist/
-*.env
+.env*
 coverage/
 request.rest

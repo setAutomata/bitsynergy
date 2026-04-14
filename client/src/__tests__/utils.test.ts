@@ -354,7 +354,7 @@ describe("formatDate", () => {
 });
 
 describe("fileToBase64", () => {
-  it("removes metadata correctly", async () => {
+  it("should remove metadata correctly", async () => {
     const pngBase64 =
       "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==";
     const blob = await (
