@@ -41,16 +41,14 @@ function DisplayStream({
               <div className="userPrompt">
                 <div>{message.content}</div>
               </div>
-              {message.images && message.images?.length > 0 && (
+              {message.images && message.images.length > 0 && (
                 <div className="uploaded_img_container">
-                  <img
-                    src={
-                      `data:` +
-                      extractMIME(message.images[message.images?.length - 1]) +
-                      `;base64,${message.images[message.images?.length - 1]}`
-                    }
-                    alt="uploaded image"
-                  />
+                  {message.images.map((base64String, i) => (
+                    <img
+                      src={`data:${extractMIME(base64String)};base64,${base64String}`}
+                      alt={`uploaded attachment ${i + 1}`}
+                    />
+                  ))}
                 </div>
               )}
             </div>

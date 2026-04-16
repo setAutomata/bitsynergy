@@ -6,6 +6,7 @@ import {
   useState,
   useReducer,
   useEffect,
+  type ChangeEvent,
 } from "react";
 import { Tooltip } from "react-tooltip";
 import { jwtDecode } from "jwt-decode";
@@ -40,6 +41,7 @@ function Home() {
     React.Dispatch<HomeAction>,
   ];
   const [LLMmodel, setLLMmodel] = useState<string>("");
+  const [fileList, setFileList] = useState<FileBox[]>([]);
   const inputFile = useRef<HTMLInputElement>(null);
   const contEditRef = useRef<HTMLDivElement>(null);
   const modelsContainerRef = useRef<HTMLDivElement>(null);
@@ -118,53 +120,90 @@ function Home() {
     dispatch({ type: "SET_LOADING", payload: false });
   }
 
+  function handleUploadList(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files) {
+      const newFiles: FileBox[] = Array.from(e.target.files).map((file) => ({
+        id: Math.random().toString(36).substring(2, 9),
+        file,
+      }));
+      setFileList((prev) => [...prev, ...newFiles]);
+      e.target.value = "";
+    }
+  }
+
+  function removeAttachment(id: string) {
+    setFileList((prev) => prev.filter((item) => item.id != id));
+  }
+
   async function handleSubmit(e: SubmitEventT) {
     e.preventDefault();
     if (state.prompt.trim() === "" || state.isStreaming) return;
-    dispatch({
-      type: "SET_PROMPT",
-      payload: utils.sanitizePrompt(state.prompt),
-    });
-    dispatch({ type: "SET_SUBMITTED", payload: true });
-    const newMsg: Message = { role: "user", content: state.prompt };
 
-    // separate text file from image file
-    if (inputFile.current?.files?.length) {
-      const file = inputFile.current.files[inputFile.current.files.length - 1];
-      if (file.type.startsWith("text/")) {
-        const textContent = await file.text();
-        newMsg.content = (newMsg.content || "") + "\n" + textContent;
-      } else {
-        const base64Img = await utils.fileToBase64(file);
-        if (base64Img) newMsg.images = [base64Img];
+    // Sanitize the user prompt
+    const sanitizedPrompt = utils.sanitizePrompt(state.prompt);
+    dispatch({ type: "SET_PROMPT", payload: sanitizedPrompt });
+    dispatch({ type: "SET_SUBMITTED", payload: true });
+
+    const imagePromises: Promise<Base64URLString>[] = [];
+    let combinedText = "";
+
+    // Process Files
+    for (const item of fileList) {
+      const { file } = item;
+      if (file.type.startsWith("image/")) {
+        imagePromises.push(utils.fileToBase64(file));
+      } else if (file.type === "application/pdf") {
+        let textContent = await utils.extractPdfText(file);
+        if (textContent.length > 20000) {
+          textContent = textContent.slice(0, 20000) + "\n...[truncated]";
+        }
+        combinedText += `\n\n<file name="${file.name}">\n${textContent}\n</file>`;
+      } else if (
+        file.type.startsWith("text/") ||
+        utils.TEXT_MIME_TYPES.includes(file.type) ||
+        file.name.endsWith(".sh")
+      ) {
+        let textContent = await file.text();
+        if (textContent.length > 20000) {
+          textContent = textContent.slice(0, 20000) + "\n...[truncated]";
+        }
+        combinedText += `\n\n[File: ${file.name}]\n\`\`\`bash\n${textContent}\n\`\`\``;
       }
     }
-    const id = chats[chats.length - 1]?._id ?? new ObjectID().toString();
-    const updatedMsg: Chats = [
-      ...chats,
-      {
-        _id: id,
-        messages: [newMsg, { role: "assistant", content: "" }],
-      },
-    ];
-    setChats(updatedMsg);
-
-    if (abortControllerRef.current) abortControllerRef.current.abort();
-    abortControllerRef.current = new AbortController();
-
-    if (contEditRef.current) contEditRef.current.innerText = "";
-    if (inputFile.current) inputFile.current.value = "";
 
     try {
+      const base64Images = await Promise.all(imagePromises);
+
+      const newMsg: Message = {
+        role: "user",
+        content: (sanitizedPrompt + combinedText).trim(),
+        images: base64Images,
+      };
+
+      const id = chats[chats.length - 1]?._id ?? new ObjectID().toString();
+
+      const updatedChat: Chat = {
+        _id: id,
+        messages: [newMsg, { role: "assistant", content: "" }],
+      };
+      setChats((prev) => [...prev, updatedChat]);
+
+      if (abortControllerRef.current) abortControllerRef.current.abort();
+      abortControllerRef.current = new AbortController();
+      if (contEditRef.current) contEditRef.current.innerText = "";
+      if (inputFile.current) inputFile.current.value = "";
+      setFileList([]);
+
       dispatch({ type: "SET_LOADING", payload: true });
       const response: Response | null = await apiCall.chat(
-        utils.extractMessages(updatedMsg),
+        [...utils.extractMessages(chats), newMsg],
         accessToken,
         abortControllerRef.current.signal,
         email,
         id,
         LLMmodel,
       );
+
       if (!response) return handleError("Error: No response received from API");
       await handleStream(response);
     } catch (error) {
@@ -383,8 +422,10 @@ function Home() {
                     >
                       <input
                         ref={inputFile}
+                        multiple
                         type="file"
                         accept={supportedFileTypes}
+                        onChange={handleUploadList}
                         hidden
                       />
                       <button onClick={openAttachment}>
@@ -432,6 +473,16 @@ function Home() {
                       )}
                     </div>
                   </div>
+                </div>
+                <div className="home__upload__indicator">
+                  {fileList.map((item) => (
+                    <div key={item.id}>
+                      {item.file.name}{" "}
+                      <button onClick={() => removeAttachment(item.id)}>
+                        X
+                      </button>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

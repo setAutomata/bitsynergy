@@ -15,6 +15,13 @@ import {
   extractMessages,
 } from "../utils/utils.ts";
 
+vi.mock("pdfjs-dist", () => ({
+  GlobalWorkerOptions: {
+    workerSrc: "",
+  },
+  getDocument: vi.fn(),
+}));
+
 describe("handleInputStae", () => {
   it("should update the specific field in the state object", () => {
     const mockEvent = {

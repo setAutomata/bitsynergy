@@ -1,5 +1,11 @@
 import React from "react";
 import langToExt from "./lang-to-ext-map.ts";
+import * as pdfjsLib from "pdfjs-dist";
+import type {
+  TextItem,
+  TextMarkedContent,
+} from "pdfjs-dist/types/src/display/api";
+pdfjsLib.GlobalWorkerOptions.workerSrc = `/pdf.worker.min.mjs`;
 
 export function handleInputState(
   e: React.ChangeEvent<HTMLInputElement>,
@@ -185,5 +191,48 @@ export async function fileToBase64(file: File): Promise<Base64URLString> {
 }
 
 export function extractMessages(chatList: Chats): Message[] {
-  return chatList.flatMap((chat) => chat.messages);
+  if (chatList.length === 0) return [];
+  return chatList[chatList.length - 1].messages;
 }
+
+export const extractPdfText = async (file: File): Promise<string> => {
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const typedArray = new Uint8Array(arrayBuffer);
+
+    const loadingTask = pdfjsLib.getDocument({
+      data: typedArray,
+      isEvalSupported: false,
+    });
+
+    const pdf = await loadingTask.promise;
+    let fullText = "";
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const textContent = await page.getTextContent();
+
+      const pageText = textContent.items
+        .map((item: TextItem | TextMarkedContent) => {
+          if ("str" in item) return item.hasEOL ? item.str + "\n" : item.str;
+          return "";
+        })
+        .join(" ");
+
+      fullText += `--- Page ${i} ---\n${pageText}\n\n`;
+    }
+
+    return fullText.trim();
+  } catch (error) {
+    throw new Error(
+      `Failed to read PDF: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
+  }
+};
+
+export const TEXT_MIME_TYPES = [
+  "application/x-shellscript",
+  "application/javascript",
+  "application/json",
+  "application/xml",
+];

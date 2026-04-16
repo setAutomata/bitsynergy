@@ -49,11 +49,17 @@ type SubmitEventT =
   | React.MouseEvent<HTMLButtonElement>
   | React.MouseEvent<HTMLDivElement>;
 
-// for LLM List in Home.tsx======================
+// for LLM List in Home.tsx ======================
 type Model = {
   name: string;
   model: string;
   modified_at: string;
   size: string;
   digest: string;
+};
+
+// for attachments in Home.tsx ====================
+type FileBox = {
+  id: string;
+  file: File;
 };
