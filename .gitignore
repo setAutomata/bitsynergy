@@ -5,4 +5,3 @@ coverage/
 request.rest
 server/logs/*
 !server/logs/.gitkeep
-*.min.mjs linguist-generated=true
