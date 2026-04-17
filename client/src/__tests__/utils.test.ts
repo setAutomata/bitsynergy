@@ -13,7 +13,9 @@ import {
   streamResponse,
   fileToBase64,
   extractMessages,
+  extractPdfText,
 } from "../utils/utils.ts";
+import * as pdfjsLib from "pdfjs-dist";
 
 vi.mock("pdfjs-dist", () => ({
   GlobalWorkerOptions: {
@@ -22,7 +24,7 @@ vi.mock("pdfjs-dist", () => ({
   getDocument: vi.fn(),
 }));
 
-describe("handleInputStae", () => {
+describe("handleInputState", () => {
   it("should update the specific field in the state object", () => {
     const mockEvent = {
       target: { name: "username", value: "John Doe" },
@@ -406,5 +408,38 @@ describe("extractMessages", () => {
   it("should return an empty array if there are no chats", () => {
     const chatList: Chats = [];
     expect(extractMessages(chatList)).toEqual([]);
+  });
+});
+
+describe("extractPdfText", () => {
+  it("should extract text from a mock PDF", async () => {
+    const mockPdf = {
+      numPages: 1,
+      getPage: vi.fn().mockResolvedValue({
+        getTextContent: vi.fn().mockResolvedValue({
+          items: [{ str: "Hello World", hasEOL: false }],
+        }),
+      }),
+    };
+
+    vi.mocked(pdfjsLib.getDocument).mockReturnValue({
+      promise: Promise.resolve(mockPdf),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+
+    const file = new File([""], "test.pdf", { type: "application/pdf" });
+    const result = await extractPdfText(file);
+
+    expect(result).toContain("--- Page 1 ---");
+    expect(result).toContain("Hello World");
+  });
+
+  it("should handle errors gracefully", async () => {
+    vi.mocked(pdfjsLib.getDocument).mockImplementation(() => {
+      throw new Error("Network failure");
+    });
+
+    const file = new File([""], "test.pdf");
+    await expect(extractPdfText(file)).rejects.toThrow(/Failed/i);
   });
 });

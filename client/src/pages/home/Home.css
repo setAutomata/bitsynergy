@@ -261,6 +261,26 @@
     font-size: 0.7rem !important;
 }
 
+.home__upload__indicator div {
+    display: flex;
+    gap: 0.6rem;
+    margin: 0.2rem 0;
+}
+
+.Home__remove__attachments {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 0.8rem;
+    width: 0.8rem;
+    padding: 0.05rem;
+    border: none;
+    background: var(--modal-btn-del-hover);
+    color: #222;
+    border-radius: 50%;
+}
+
 /* ----------------------------- */
 
 @media (max-width: 760px) {

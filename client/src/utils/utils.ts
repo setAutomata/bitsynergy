@@ -221,7 +221,6 @@ export const extractPdfText = async (file: File): Promise<string> => {
 
       fullText += `--- Page ${i} ---\n${pageText}\n\n`;
     }
-
     return fullText.trim();
   } catch (error) {
     throw new Error(

@@ -30,6 +30,7 @@ import Search from "../../assets/images/search.svg?react";
 import UpArrow from "../../assets/images/upArrow.svg?react";
 import Stop from "../../assets/images/stop.svg?react";
 import Spinner from "../../assets/images/spinner.svg?react";
+import Close from "../../assets/images/close.svg?react";
 
 function Home() {
   const { accessToken } = useContext(AuthContext);
@@ -477,9 +478,17 @@ function Home() {
                 <div className="home__upload__indicator">
                   {fileList.map((item) => (
                     <div key={item.id}>
-                      {item.file.name}{" "}
-                      <button onClick={() => removeAttachment(item.id)}>
-                        X
+                      {item.file.name}
+                      <Tooltip
+                        id="rm_attachment"
+                        render={() => <>"remove attachment"</>}
+                      />
+                      <button
+                        className="Home__remove__attachments"
+                        data-tooltip-id="rm_attachment"
+                        onClick={() => removeAttachment(item.id)}
+                      >
+                        <Close />
                       </button>
                     </div>
                   ))}
