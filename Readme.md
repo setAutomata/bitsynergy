@@ -122,6 +122,10 @@ VITE_BACKEND_BASEURL=http://localhost:3030
 ### 4. Run the App
 
 ```bash
+cd bitsynergy/
+npm run dev
+
+# or run individually as
 cd server/ && npm run dev
 cd client/ && npm run dev
 ```
@@ -131,6 +135,18 @@ cd client/ && npm run dev
 ```bash
 sudo chmod +x runProject.sh
 ./runProject.sh
+```
+### This project uses Vitest for client-side testing.
+> To run the tests:
+```bash
+cd client
+# run test on terminal
+npm run test
+# For browser-based interface
+npm run test:ui
+# To see test coverage
+npm run test:coverage
+
 ```
 
 ### Setup Ollama API to prevent CORS issue when accessing from mobile phone
