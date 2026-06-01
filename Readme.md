@@ -13,17 +13,17 @@ AI client to interact with LLMs using Ollama API.
 
 ## Features
 
-- JWT Authentication
+- JWT-based Authentication
 - Support for multimodal LLMs
-- Mobile view
-- Abstracted ollama API from client using proxy
-- Scalable due to decoupling which makes it easier to add load balancing and rate limiting
-- Choose from installed models to interact with
-- Protected routes
-- AI interactions are saved using mongoDB under your account
-- Modular and scalable codebase
-- GUI heavily inspired by https://chat.deepseek.com/
-- Logging
+- Responsive, Mobile-First Design
+- Ollama API abstraction through a backend proxy
+- Scalable architecture with decoupled components, making load balancing and rate limiting easier to implement
+- Select and interact with locally installed models
+- Protected routes and access control
+- AI conversations are persisted in MongoDB and associated with user accounts
+- Modular, maintainable, and scalable codebase
+- UI heavily inspired by DeepSeek Chat
+- Comprehensive logging
 
 ## Tech Stack
 
@@ -44,24 +44,24 @@ AI client to interact with LLMs using Ollama API.
 ```
 bitSynergy/
 ├── client/
-│	├── public/
-│	└── src/
-│		├── assets/
-│		├── authentication/
-│		├── components/
-│		├── context/
-│		├── layout/
-│		├── pages/
-│		├── request/
-│		└── utils/
+│    ├── public/
+│    └── src/
+│        ├── assets/
+│        ├── authentication/
+│        ├── components/
+│        ├── context/
+│        ├── layout/
+│        ├── pages/
+│        ├── request/
+│        └── utils/
 │
 ├── server/
-│	├── config/
-│	├── controllers/
-│	├── logs/
-│	├── middleware/
-│	├── model/
-│	└── routes/
+│    ├── config/
+│    ├── controllers/
+│    ├── logs/
+│    ├── middleware/
+│    ├── model/
+│    └── routes/
 │
 ├── runProject.sh
 ├── .gitignore
@@ -77,7 +77,7 @@ git clone https://github.com/setAutomata/bitsynergy.git
 cd bitsynergy
 ```
 
->N.B Also install ollama and mongoDB on your system
+> N.B Also install ollama and mongoDB on your system
 
 ### 2. Install Dependencies
 
@@ -130,14 +130,17 @@ cd server/ && npm run dev
 cd client/ && npm run dev
 ```
 
->(optional) For Linux users on gnome desktop environment, you can run the _runProject.sh_ shell script:
+> (optional) For Linux users on gnome desktop environment, you can run the _runProject.sh_ shell script:
 
 ```bash
 sudo chmod +x runProject.sh
 ./runProject.sh
 ```
+
 ### This project uses Vitest for client-side testing.
+
 > To run the tests:
+
 ```bash
 cd client
 # run test on terminal
@@ -146,16 +149,14 @@ npm run test
 npm run test:ui
 # To see test coverage
 npm run test:coverage
-
 ```
 
 ### Setup Ollama API to prevent CORS issue when accessing from mobile phone
 
->On Linux
+> On Linux
 
 ```bash
 sudo systemctl edit ollama.service
-
 ```
 
 add the line:
@@ -166,7 +167,7 @@ Environment="OLLAMA_HOST=0.0.0.0"
 Environment="OLLAMA_ORIGINS=http://<your local ip>:*"
 ```
 
->On Mac
+> On Mac
 
 ```bash
 launchctl setenv OLLAMA_HOST "0.0.0.0"
