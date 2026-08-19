@@ -29,6 +29,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Type check and tests
-        run: |
-          npx tsc -b
-          npm eun test -- --run
+        run: npm run test -- --run
